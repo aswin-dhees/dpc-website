@@ -1,0 +1,150 @@
+---
+import { siteConfig, postalAddressForJsonLd } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Path only, e.g. `/` or `/about` — used with `site` from astro.config for canonical & OG URL */
+  canonicalPath?: string;
+  /** Absolute path to an image under `public/`, e.g. `/og-image.png` (1200×630 recommended) */
+  ogImagePath?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = siteConfig.defaultTitle,
+  description = siteConfig.description,
+  canonicalPath,
+  ogImagePath,
+  noindex = false,
+} = Astro.props;
+
+const siteOrigin = Astro.site?.origin ?? new URL(Astro.url).origin;
+const path = canonicalPath ?? Astro.url.pathname;
+const canonicalUrl = new URL(path, siteOrigin).href;
+const resolvedOgPath =
+  ogImagePath != null && ogImagePath.length > 0
+    ? ogImagePath
+    : siteConfig.defaultOgImagePath;
+const ogImage = new URL(
+  resolvedOgPath.startsWith("/") ? resolvedOgPath : `/${resolvedOgPath}`,
+  siteOrigin,
+).href;
+
+const businessId = `${siteOrigin}/#localbusiness`;
+const websiteId = `${siteOrigin}/#website`;
+
+const areaServedGraph = [
+  {
+    "@type": "GeoCircle",
+    geoMidpoint: {
+      "@type": "GeoCoordinates",
+      latitude: siteConfig.geo.latitude,
+      longitude: siteConfig.geo.longitude,
+    },
+    geoRadius: {
+      "@type": "Distance",
+      value: siteConfig.serviceRadiusKm,
+      unitCode: "KMT",
+    },
+  },
+  ...siteConfig.areaServedNames.map((name) => ({
+    "@type": "AdministrativeArea",
+    name,
+  })),
+  ...siteConfig.chennaiLocalAreas.map((name) => ({
+    "@type": "AdministrativeArea",
+    name: `${name}, Chennai`,
+  })),
+];
+
+const sameAsFiltered = siteConfig.sameAs.filter((u) => u.length > 0);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "PetStore"],
+      "@id": businessId,
+      name: siteConfig.businessName,
+      legalName: siteConfig.legalName,
+      description,
+      url: `${siteOrigin}/`,
+      telephone: siteConfig.phoneE164,
+      email: siteConfig.email,
+      image: [ogImage],
+      logo: {
+        "@type": "ImageObject",
+        url: ogImage,
+      },
+      address: {
+        "@type": "PostalAddress",
+        ...postalAddressForJsonLd(),
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: siteConfig.geo.latitude,
+        longitude: siteConfig.geo.longitude,
+      },
+      areaServed: areaServedGraph,
+      ...(sameAsFiltered.length > 0 ? { sameAs: sameAsFiltered } : {}),
+    },
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: `${siteOrigin}/`,
+      name: siteConfig.businessName,
+      description,
+      inLanguage: "en-IN",
+      publisher: { "@id": businessId },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#6b0848" />
+    <meta name="geo.region" content="IN-TN" />
+    <meta name="geo.placename" content={siteConfig.address.addressLocality} />
+    <meta
+      name="geo.position"
+      content={`${siteConfig.geo.latitude};${siteConfig.geo.longitude}`}
+    />
+    <meta name="ICBM" content={`${siteConfig.geo.latitude}, ${siteConfig.geo.longitude}`} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:site_name" content={siteConfig.businessName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={`${siteConfig.businessName} — ${siteConfig.address.addressLocality}`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="bg-cream text-text-dark font-sans antialiased">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import "../styles/global.css";
+</style>

@@ -1,0 +1,106 @@
+---
+import { siteConfig } from "../data/site";
+
+const navLinks = [
+  { href: "#home", label: "Home" },
+  { href: "#features", label: "Why Fresh" },
+  { href: "#products", label: "Our Food" },
+  { href: "#testimonials", label: "Reviews" },
+  { href: "#service-areas", label: "Areas" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-cream-light/95 backdrop-blur-md border-b border-cream-dark/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href="#home" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+          <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703 1.725 1.722 3.656 1 1.261-.472 1.96-1.45 2.344-2.5"></path>
+            <path d="M14.267 5.172c0-1.39 1.577-2.493 3.5-2.172 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5"></path>
+            <path d="M8 14v.5"></path>
+            <path d="M16 14v.5"></path>
+            <path d="M11.25 16.25h1.5L12 17l-.75-.75Z"></path>
+            <path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444c0-1.061-.162-2.2-.493-3.309m-9.243-6.082A8.801 8.801 0 0 1 12 5c.78 0 1.5.108 2.161.306"></path>
+          </svg>
+        </div>
+        <div>
+          <span class="font-display text-xl font-semibold text-primary tracking-tight">{siteConfig.businessName}</span>
+          <span class="block text-xs text-text-light font-medium -mt-0.5">Premium Pet Food</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-1">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="px-4 py-2 text-sm font-medium text-text-medium hover:text-primary rounded-xl hover:bg-cream transition-all duration-200"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- CTA Buttons -->
+      <div class="flex items-center gap-3">
+        <a
+          href="#contact"
+          class="hidden sm:inline-flex px-5 py-2.5 text-sm font-semibold text-cream-light bg-primary hover:bg-primary-dark rounded-full transition-all duration-300 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-105"
+        >
+          Order Now
+        </a>
+        
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden p-2 rounded-xl hover:bg-cream transition-colors"
+          aria-label="Toggle menu"
+        >
+          <svg class="w-6 h-6 text-text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div id="mobile-menu" class="md:hidden hidden bg-cream-light border-t border-cream-dark/30">
+    <nav class="px-4 py-4 space-y-1">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="block px-4 py-3 text-sm font-medium text-text-medium hover:text-primary rounded-xl hover:bg-cream transition-all duration-200"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="#contact"
+        class="block mt-4 px-4 py-3 text-sm font-semibold text-center text-cream-light bg-primary hover:bg-primary-dark rounded-full transition-all duration-300"
+      >
+        Order Now
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu when clicking a link
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+</script>

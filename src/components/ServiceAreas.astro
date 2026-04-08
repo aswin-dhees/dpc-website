@@ -1,0 +1,46 @@
+---
+import { siteConfig } from "../data/site";
+---
+
+<section
+  id="service-areas"
+  class="py-16 lg:py-20 bg-cream border-y border-cream-dark/20"
+  aria-labelledby="service-areas-heading"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-10">
+      <span class="inline-block px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-4">
+        Delivery coverage
+      </span>
+      <h2
+        id="service-areas-heading"
+        class="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-text-dark text-balance"
+      >
+        Where we deliver in Chennai
+      </h2>
+      <p class="mt-4 text-lg text-text-medium leading-relaxed text-pretty">
+        Fresh pet food across the city and suburbs. Don&apos;t see your area? Message us — we often expand routes.
+      </p>
+    </div>
+
+    <ul
+      class="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-4xl mx-auto list-none p-0"
+      role="list"
+    >
+      {siteConfig.chennaiLocalAreas.map((area) => (
+        <li>
+          <span
+            class="inline-block px-3 py-1.5 sm:px-4 sm:py-2 text-sm font-medium text-text-dark bg-white rounded-full border border-cream-dark/40 shadow-sm shadow-cream-darker/10"
+          >
+            {area}
+          </span>
+        </li>
+      ))}
+    </ul>
+
+    <p class="mt-8 text-center text-sm text-text-light max-w-2xl mx-auto">
+      {siteConfig.serviceAreaLabel}. Coverage within our{" "}
+      {siteConfig.serviceRadiusKm}&nbsp;km service radius from central Chennai.
+    </p>
+  </div>
+</section>
