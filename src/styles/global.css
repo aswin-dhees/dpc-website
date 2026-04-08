@@ -22,8 +22,8 @@
   --color-accent-soft: #c99a6b;
   
   /* Fonts */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Nunito', system-ui, -apple-system, sans-serif;
+  --font-display: 'Comfortaa', 'Nunito', system-ui, -apple-system, sans-serif;
   
   /* Border radius - rounded aesthetic */
   --radius-sm: 0.5rem;
@@ -36,6 +36,10 @@
 
 /* Custom utility classes */
 @layer utilities {
+  .font-display {
+    text-transform: lowercase;
+  }
+
   .text-balance {
     text-wrap: balance;
   }
