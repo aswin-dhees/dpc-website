@@ -1,36 +1,20 @@
 ---
 const testimonials = [
   {
-    name: "Priya Sharma",
-    pet: "Bruno (Golden Retriever)",
-    location: "Anna Nagar, Chennai",
+    name: "Amudhu",
+    pet: "Vikram (Rottweiler)",
+    location: "Porur, Chennai",
     image: "/images/testimonial-1.jpg",
     rating: 5,
-    text: "Bruno was always a picky eater until we switched to Dhee's Pet Company. Now he finishes every meal! His coat is shinier and he has so much more energy. The convenience of home delivery is a bonus.",
+    text: "From the first order to the weekly deliveries, Dhees has always been punctual and professional. The food is well-portioned, and the detailed nutrition info makes me feel like I am making the right choice for Vikram.",
   },
   {
-    name: "Rajesh Kumar",
-    pet: "Whiskers (Persian Cat)",
-    location: "Adyar, Chennai",
+    name: "Velazhagan",
+    pet: "Kay (Beagle)",
+    location: "Keelkattalai, Chennai",
     image: "/images/testimonial-2.jpg",
     rating: 5,
-    text: "Whiskers had digestive issues for years. After just two weeks on fresh food, the difference was remarkable. No more upset stomach, and she actually looks forward to meal times now.",
-  },
-  {
-    name: "Ananya Menon",
-    pet: "Max & Bella (Beagles)",
-    location: "T. Nagar, Chennai",
-    image: "/images/testimonial-3.jpg",
-    rating: 5,
-    text: "Having two dogs, meal prep was always a challenge. Dhee's Pet Company made it so easy with perfectly portioned meals. Both Max and Bella are healthier than ever, and I love the transparency about ingredients.",
-  },
-  {
-    name: "Vikram Rajan",
-    pet: "Luna (Indie Cat)",
-    location: "Velachery, Chennai",
-    image: "/images/testimonial-4.jpg",
-    rating: 5,
-    text: "I was skeptical about fresh pet food at first, but the team at Dhee's Pet Company answered all my questions. Luna absolutely loves the fish feast, and I feel good knowing exactly what she's eating.",
+    text: "Dhees has completely transformed how I feed Kay, my dog. Knowing the meals are nutritionist-formulated and preservative-free gives me peace of mind. Plus, I have noticed improved energy and a shinier coat in Kay.",
   },
 ];
 ---
@@ -82,13 +66,11 @@ const testimonials = [
           
           <!-- Author -->
           <div class="flex items-center gap-4 pt-6 border-t border-cream-dark/30">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cream to-cream-dark overflow-hidden">
-              <img
-                src={testimonial.image}
-                alt={`${testimonial.name}, pet parent from ${testimonial.location}`}
-                class="w-full h-full object-cover"
-                loading="lazy"
-              />
+            <div
+              class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent-warm/20 text-primary font-bold text-xl flex items-center justify-center"
+              aria-label={`${testimonial.name} profile initial`}
+            >
+              {testimonial.name.charAt(0).toUpperCase()}
             </div>
             <div>
               <span class="block font-semibold text-text-dark">{testimonial.name}</span>
