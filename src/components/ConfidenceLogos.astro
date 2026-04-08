@@ -1,0 +1,38 @@
+---
+const logos = [
+  { src: '/images/confidence-logo-1.jpg', alt: 'FSSAI food safety guarantee certification logo for pet food quality' },
+  { src: '/images/confidence-logo-2.jpg', alt: 'Vet nutritionist approved badge for balanced pet meal nutrition' },
+  { src: '/images/confidence-logo-3.jpg', alt: '100 percent natural ingredients logo for fresh pet food recipes' },
+  { src: '/images/confidence-logo-4.jpg', alt: 'Lab tested and certified quality seal for safe pet food' },
+  { src: '/images/confidence-logo-5.jpg', alt: 'Non GMO ingredients certification logo for natural pet meals' },
+  { src: '/images/confidence-logo-6.jpg', alt: 'Preservatives free badge indicating clean and fresh pet food' },
+];
+---
+
+<section class="py-16 sm:py-20 bg-cream-light border-y border-cream-dark/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto">
+      <p class="text-2xl sm:text-3xl lg:text-4xl font-display font-semibold text-text-dark leading-snug text-balance">
+        As pet lovers ourselves, we understand that you want to be confident in every meal you serve.
+      </p>
+      <p class="mt-4 text-base sm:text-lg text-text-medium">
+        Trusted fresh pet food standards for pet parents in Chennai.
+      </p>
+    </div>
+
+    <div class="mt-10 grid grid-cols-3 gap-4 sm:gap-5 max-w-4xl mx-auto">
+      {
+        logos.map((logo) => (
+          <div class="aspect-square rounded-2xl border border-primary/20 bg-white/80 shadow-sm flex items-center justify-center p-4">
+            <img
+              src={logo.src}
+              alt={logo.alt}
+              loading="lazy"
+              class="w-full h-full object-contain"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
