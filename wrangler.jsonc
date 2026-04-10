@@ -12,7 +12,7 @@
 	"pages_build_output_dir": "./dist",
 	"workers_dev": false,
 	"route": {
-		"pattern": "dhees.com/*",
+		"pattern": "dhees.com",
 		"custom_domain": true
 	},
 	"observability": {
