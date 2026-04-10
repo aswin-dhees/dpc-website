@@ -69,7 +69,7 @@ export const siteConfig = {
    */
   sameAs: ["https://wa.me/919363611809"],
   /** Default Open Graph / schema image under `public/` (absolute URL built at render time) */
-  defaultOgImagePath: "/favicon.svg",
+  defaultOgImagePath: "/images/og-image.jpg",
 } as const;
 
 export function postalAddressForJsonLd(): Record<string, string> {
