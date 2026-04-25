@@ -11,10 +11,16 @@
 	],
 	"pages_build_output_dir": "./dist",
 	"workers_dev": false,
-	"route": {
+	"routes": [
+		{
 		"pattern": "dhees.com",
 		"custom_domain": true
-	},
+		},
+		{
+		"pattern": "www.dhees.com",
+		"custom_domain": true
+		}
+	],
 	"observability": {
 		"enabled": true
 	},
