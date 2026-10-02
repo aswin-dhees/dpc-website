@@ -1,5 +1,6 @@
 ---
 import { siteConfig, postalAddressForJsonLd } from "../data/site";
+import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 
 interface Props {
   title?: string;
@@ -143,6 +144,7 @@ const jsonLd = {
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <GoogleAnalytics />
   </head>
   <body class="bg-cream text-text-dark font-sans antialiased">
     <slot />
